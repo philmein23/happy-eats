@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background:linear-gradient(bottom left, #b63a03, #c6891e);
+}
+
+.header-grid {
+  display:grid;
+}
+
+.navbar {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+  justify-content: center;
+
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+}

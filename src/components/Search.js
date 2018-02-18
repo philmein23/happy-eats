@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from "react";
+import Icon from "./Icon";
+import { Icon as searchIcon } from '../constants'
 
 export default class Search extends Component {
   searchRecipe = e => {
     e.preventDefault();
-
+    
     this.props.searchRecipe(this.props.searchValue);
   };
 
@@ -16,14 +18,17 @@ export default class Search extends Component {
 
     return (
       <Fragment>
-        <form onSubmit={this.searchRecipe}>
-          <input
-            type="text"
-            value={searchValue}
-            onChange={this.handleChangeValue}
-          />
+        <form className="form-search" onSubmit={this.searchRecipe}>
+            <Icon className={'search-icon'} size={32} iconName={searchIcon.search} />
+            <input
+                class="search-bar"
+                type="search"
+                placeholder="Search for all food recipes"
+                value={searchValue}
+                onChange={this.handleChangeValue}
+            />
 
-          <button type="submit">Search</button>
+          <button className="submit" type="submit">Search</button>
         </form>
       </Fragment>
     );

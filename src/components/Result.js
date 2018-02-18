@@ -20,9 +20,9 @@ function CustomLink({ to, children }) {
 export default function Result({ loading, results, match, location }) {
   return (
     <div className="two-column">
-      <ul>
+      <ul className="recipeList">
         {results.map(recipe => (
-          <Fragment>
+          <li>
             <img src={recipe.imageUrlsBySize["90"]} />
             <CustomLink
               to={{
@@ -32,7 +32,7 @@ export default function Result({ loading, results, match, location }) {
             >
               {recipe.recipeName}
             </CustomLink>
-          </Fragment>
+          </li>
         ))}
       </ul>
 

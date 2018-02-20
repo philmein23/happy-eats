@@ -1,60 +1,39 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 
-import Search from "./Search";
-import Icon from "./Icon";
-import { Icon as iconList } from '../constants'
-
-import { getRecipes } from "../api";
+import RecipesContainer from './RecipesContainer';
+import Ingredients from './Ingredients';
+import CustomLink from './CustomLink';
 
 export default class Home extends Component {
-  state = {
-    searchTerm: "",
-    recipes: []
-  };
-
-  handleChangeValue = value => {
-    this.setState(() => ({ searchTerm: value }));
-  };
-
-  searchRecipes = async () => {
-    const { searchTerm } = this.state;
-
-    const recipes = await getRecipes(searchTerm);
-
-    this.setState(() => ({
-      recipes: recipes.matches
-    }));
-  };
-
   render() {
-    const { recipes, searchTerm } = this.state;
-
     return (
-      <div className="grid-container">
-        <div className="logo-title-grid">
-            <Icon className={'logo'} size={100} iconName={iconList.plate_and_fork} viewBox={350} />
-            <h1 className="main-title">Happy Eats</h1>
-        </div>
-        
+      <RecipesContainer {...this.props} isMainPage={true}>
+        {
+          ({recipes}) => (
+            <ul className="results-subgrid">
+              <Ingredients />
 
-        <Search
-          searchValue={searchTerm}
-          searchRecipe={this.searchRecipes}
-          onChangeValue={this.handleChangeValue}
-        />
+              {recipes.map(recipe => (
+                <div key={recipe.id} className="info-grid">
+                  <CustomLink
+                    to={{
+                      pathname: `${this.props.location.pathname}recipes/${recipe.id}`,
+                      state: {
+                        recipes
+                      }
+                    }}
+                  >
+                    <img className="image" src={recipe.imageUrlsBySize["90"]} />
+                    {recipe.recipeName}
+                  </CustomLink>
+                </div>
+              ))}
+            </ul>
+          )
+        }
+      </RecipesContainer>
 
-        {recipes.length > 0 && (
-          <Redirect
-            to={{
-              pathname: "/recipes",
-              state: {
-                recipes
-              }
-            }}
-          />
-        )}
-      </div>
     );
   }
 }

@@ -5,7 +5,7 @@ import { Icon as searchIcon } from '../constants'
 export default class Search extends Component {
   searchRecipe = e => {
     e.preventDefault();
-    
+
     this.props.searchRecipe(this.props.searchValue);
   };
 
@@ -21,7 +21,7 @@ export default class Search extends Component {
         <form className="form-search" onSubmit={this.searchRecipe}>
             <Icon className={'search-icon'} size={32} iconName={searchIcon.search} />
             <input
-                class="search-bar"
+                className="search-bar"
                 type="search"
                 placeholder="Search for all food recipes"
                 value={searchValue}

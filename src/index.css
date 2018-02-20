@@ -20,15 +20,27 @@ body {
 
 .recipeList > li {
   list-style: none;
+
 }
 
-.recipeList > li img {
-  width: 90%;
+li > a {
+  text-decoration: none;
+  color: black;
+}
+
+ ul img.image {
+  width: 100%;
 }
 
 .logo-title-grid {
   display: grid;
   grid-template-columns: auto 1fr;
+  grid-column: 5 / 10;
+}
+
+.searchBar {
+  grid-column: 5 / 9;
+  grid-row: 2;
 }
 
 .header-grid {
@@ -37,7 +49,6 @@ body {
   grid-template-columns: max-content 300px;
   padding: 0 10px;
   background: #a1c9ec;
-
 }
 
 .recipe-header {
@@ -47,9 +58,24 @@ body {
 
 .grid-container {
   display: grid;
+  grid-template-columns: repeat(12, 1fr);
   justify-content: center;
   background: #a1c9ec;
   padding: 10px 0;
+}
+
+.results-subgrid {
+  display: grid;
+  grid-column: 1/-1;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-gap: 5px;
+  padding: 20px;
+  background: #FFF;
+  height: 100vh;
+}
+
+.info-grid {
+  grid-column: span 2;
 }
 
 .main-title {
@@ -57,7 +83,6 @@ body {
   font-family: "Playfair display", serif;
   font-size: 50px;
   font-weight: bold;
-  text-align: center;
   color: #1b1713;
 }
 

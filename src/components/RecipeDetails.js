@@ -17,7 +17,6 @@ export default class RecipeDetails extends Component {
     this.setState(() => ({ recipeDetails: null, loading: true }))
 
     const recipeDetails = await getRecipe(recipeId);
-    console.log(recipeDetails);
 
     this.setState(() => ({
       recipeDetails,
@@ -41,8 +40,6 @@ export default class RecipeDetails extends Component {
 
         recipeImage = image;
     }
-
-    console.log('image', recipeImage)
 
     return loading === true ? (
       <h1>Loading...</h1>

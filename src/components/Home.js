@@ -10,17 +10,16 @@ export default class Home extends Component {
     return (
       <RecipesContainer {...this.props} isMainPage={true}>
         {
-          ({recipes}) => (
+          ({ state, getRecipeFns }) => (
             <ul className="results-subgrid">
-              <Ingredients />
-
-              {recipes.map(recipe => (
+              <Ingredients buildRecipes={getRecipeFns.buildRecipe} />
+              {state.recipes.map(recipe => (
                 <div key={recipe.id} className="info-grid">
                   <CustomLink
                     to={{
                       pathname: `${this.props.location.pathname}recipes/${recipe.id}`,
                       state: {
-                        recipes
+                        recipes: state.recipes
                       }
                     }}
                   >

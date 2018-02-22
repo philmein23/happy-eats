@@ -33,7 +33,7 @@ export function getRecipeWithControlledIngredients(allowed = true, ...ingredient
     
     if (ingredients.length > 0) {
         ingredients.reduce((accumulator, ingredient) => {
-            url += `${ingredientCriteria}=${ingredient}`;
+            url += `${ingredientCriteria}=${ingredient.name}`;
 
             return url;
         }, url)

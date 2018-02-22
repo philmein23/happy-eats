@@ -13,13 +13,13 @@ export default class Recipes extends Component {
   render() {
     return (
       <RecipesContainer isMainPage={false} {...this.props}>
-        {({ loading, recipes }) => (
+        {({ state, getRecipeFns }) => (
           <Fragment>
             <main>
-              {loading === true ? (
+              {state.loading === true ? (
                 <h1>Loading...</h1>
               ) : (
-                <Result {...this.props} loading={loading} results={recipes} />
+                <Result {...this.props} loading={state.loading} results={state.recipes} />
               )}
             </main>
           </Fragment>

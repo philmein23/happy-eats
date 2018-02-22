@@ -2,42 +2,75 @@ import React, { Component, Fragment } from "react";
 
 export default class Ingredients extends Component {
   state = {
-    ingredients: [{ name: '' }]
+    ingredients: [{ name: "" }]
   };
 
   addNewIngredient = () => {
     this.setState(() => ({
-      ingredients: [...this.state.ingredients, ...[{ name: '' }]]
+      ingredients: [...this.state.ingredients, ...[{ name: "" }]]
     }));
   };
 
-  handleChange = (index) => (e) => {
-      e.persist();
-      let updatedIngredientsList = this.state.ingredients.map((ingredient, idx) => {
-            if (index !== idx) {
-                return ingredient;
-            }
+  removeIngredient = selectedIndex => {
+    let filteredIngredients = this.state.ingredients.filter(
+      (ingredient, index) => {
+        return index !== selectedIndex;
+      }
+    );
 
-            if (index === idx) {
-                return {...ingredient, ...{ name: e.target.value}}
-            }
-      })
+    this.setState(() => ({
+      ingredients: filteredIngredients
+    }));
+  };
 
-      this.setState(() => ({ 
-          ingredients: updatedIngredientsList
-        }))
-  }
+  handleChange = index => e => {
+    e.persist();
+    let updatedIngredientsList = this.state.ingredients.map(
+      (ingredient, idx) => {
+        if (index !== idx) {
+          return ingredient;
+        }
+
+        if (index === idx) {
+          return { ...ingredient, ...{ name: e.target.value } };
+        }
+      }
+    );
+
+    this.setState(() => ({
+      ingredients: updatedIngredientsList
+    }));
+
+    console.log(this.state.ingredients);
+  };
+
+  buildRecipes = e => {
+    e.preventDefault();
+
+    this.props.buildRecipes(this.state.ingredients);
+  };
 
   render() {
     return (
       <Fragment>
-        {this.state.ingredients.length > 0 &&
-          this.state.ingredients.map((ingredient, index) => (
-            <div key={index}>
-              <button onClick={this.addNewIngredient}>Add</button>
-              <input type="text" value={ingredient.name} onChange={this.handleChange(index)}/>
-            </div>
-          ))}
+        <form onSubmit={(e) => this.buildRecipes(e)}>
+          {this.state.ingredients.length > 0 &&
+            this.state.ingredients.map((ingredient, index) => (
+              <div key={index}>
+                <button type="button" onClick={this.addNewIngredient}>Add</button>
+                <button type="button" onClick={() => this.removeIngredient(index)}>
+                  Remove
+                </button>
+                <input
+                  type="text"
+                  value={ingredient.name}
+                  onChange={this.handleChange(index)}
+                />
+              </div>
+            ))}
+
+          <button type="submit">Build Recipes</button>
+        </form>
       </Fragment>
     );
   }

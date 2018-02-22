@@ -42,8 +42,7 @@ export default class RecipesContainer extends Component {
   };
 
   buildRecipeFromIngredients = async ingredients => {
-    if (ingredients) {
-      ingredients = ingredients.split(" ");
+    if (ingredients && ingredients.length > 0) {
       const recipes = await getRecipeWithControlledIngredients(
         true,
         ...ingredients
@@ -54,6 +53,11 @@ export default class RecipesContainer extends Component {
   };
 
   render() {
+    const getRecipeFns = () => ({
+      searchForRecipe: this.searchForRecipe,
+      buildRecipe: this.buildRecipeFromIngredients
+    });
+
     const layout = this.props.isMainPage ? (
         <div className="grid-container">
           <div className="logo-title-grid">
@@ -72,7 +76,7 @@ export default class RecipesContainer extends Component {
               onChangeValue={this.handleSearchValueChange}
             />
           </div>
-          {this.props.children(this.state)}
+          {this.props.children({ state: this.state, getRecipeFns: getRecipeFns()})}
         </div>
     ) : (
       <Fragment>
@@ -84,7 +88,7 @@ export default class RecipesContainer extends Component {
             onChangeValue={this.handleSearchValueChange}
           />
         </header>
-        {this.props.children(this.state)}
+        {this.props.children({ state: this.state, getRecipeFns: getRecipeFns() })}
       </Fragment>
     );
 

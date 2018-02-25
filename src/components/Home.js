@@ -12,7 +12,7 @@ export default class Home extends Component {
         {
           ({ state, getRecipeFns }) => (
             <ul className="results-subgrid">
-              <Ingredients buildRecipes={getRecipeFns.buildRecipe} />
+              {/* <Ingredients buildRecipes={getRecipeFns.buildRecipe} /> */}
               {state.recipes.map(recipe => (
                 <div key={recipe.id} className="info-grid">
                   <CustomLink
@@ -22,9 +22,11 @@ export default class Home extends Component {
                         recipes: state.recipes
                       }
                     }}
-                  >
-                    <img className="image" src={recipe.imageUrlsBySize["90"]} />
-                    {recipe.recipeName}
+                  ><div className="info-card">
+                     <img className="image" src={recipe.imageUrlsBySize["90"]} />
+                     <span className="recipeName">{recipe.recipeName}</span>
+                  </div>
+
                   </CustomLink>
                 </div>
               ))}

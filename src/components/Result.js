@@ -1,21 +1,9 @@
 import React, { Fragment } from "react";
 import { Route, Link } from "react-router-dom";
 import RecipeDetails from "./RecipeDetails";
+import CustomLink from './CustomLink';
 
-function CustomLink({ to, children }) {
-  return (
-    <Route
-      path={to.pathname}
-      children={({ match }) => (
-        <li
-          style={{ listStyle: "none", fontWeight: match ? "bold" : "normal" }}
-        >
-          <Link to={to}>{children}</Link>
-        </li>
-      )}
-    />
-  );
-}
+
 
 export default function Result({ loading, results, match, location }) {
   return (
@@ -30,7 +18,7 @@ export default function Result({ loading, results, match, location }) {
                 search: location.search
               }}
             >
-              {recipe.recipeName}
+              <span className="recipeName">{recipe.recipeName}</span>
             </CustomLink>
           </Fragment>
         ))}

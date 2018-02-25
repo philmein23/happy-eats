@@ -2,8 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Raleway", sans-serif;
-  background: #FFF;
   height: 100vh;
+  background: hsl(214, 31%, 95%);
 }
 
 .logo {
@@ -62,20 +62,35 @@ li > a {
   justify-content: center;
   background: #a1c9ec;
   padding: 10px 0;
+  height: 100vh;
+
 }
 
 .results-subgrid {
   display: grid;
   grid-column: 1/-1;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  grid-gap: 5px;
+  grid-gap: 15px;
   padding: 20px;
-  background: #FFF;
+  background:hsl(214, 31%, 95%);
   height: 100vh;
 }
 
 .info-grid {
-  grid-column: span 2;
+  grid-column: span 3;
+}
+
+.info-card {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: max-content 1fr;
+  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
+  background-color: #FFF;
+}
+
+.recipeName {
+  font-weight: 700;
+  color: hsl(0, 0%, 17%);
 }
 
 .main-title {

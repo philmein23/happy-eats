@@ -41,7 +41,6 @@ export default class Ingredients extends Component {
       ingredients: updatedIngredientsList
     }));
 
-    console.log(this.state.ingredients);
   };
 
   buildRecipes = e => {
